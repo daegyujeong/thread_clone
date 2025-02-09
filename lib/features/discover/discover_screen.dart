@@ -11,8 +11,7 @@ const Map<String, String> profileImages = {
   "Daegyu":
       "https://instagram.fsin3-1.fna.fbcdn.net/v/t51.2885-19/344872747_970803797444064_5295901516351425088_n.jpg?stp=dst-jpg_s150x150_tt6&_nc_ht=instagram.fsin3-1.fna.fbcdn.net&_nc_cat=100&_nc_oc=Q6cZ2AFCJsaZT7-ZNBP2MkQ3prD-q0lyYGzyKqLAB26jwjOUYg9i_sxFHl44HWjHkh5bidM&_nc_ohc=bGtOtHEw7ngQ7kNvgFUva5c&_nc_gid=3e03914ddc404218b981bfd54338efc1&edm=AP4sbd4BAAAA&ccb=7-5&oh=00_AYAyaAYInzat01GLzLAIdfJygg6wu8dNVyIuSfvuX_THKQ&oe=67AE841B&_nc_sid=7a9f4b",
   "La Musique Studio":
-      "https://scontent.fsin3-1.fna.fbcdn.net/v/t39.30808-1/475808476_122103979574748624_8065900265900199063_n.jpg?stp=dst-jpg_s480x480_tt6&_nc_cat=103&ccb=1-7&_nc_sid=2d3e12&_nc_ohc=TsexMt9vauwQ7kNvgFbUhX6&_nc_oc=Adggihl1HsxBICeAE-cwgmZ1l-KYgGkEkQiNd5uQApKY-d6wnowoU1LTgCUk4SPjtoQ&_nc_zt=24&_nc_ht=scontent.fsin3-1.fna&_nc_gid=A-opZiukMOu7jJIdY8AT0WC&oh=00_AYDz8M8jjVegmug4Zm_OmcTnlB4RPxxLcnUlUmN66Ct0Ag&oe=67AE9AF3",
-  "John": "https://example.com/image3.jpg",
+      "https://scontent.fsin3-1.fna.fbcdn.net/v/t39.30808-6/475808476_122103979574748624_8065900265900199063_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=TsexMt9vauwQ7kNvgFbUhX6&_nc_oc=Adggihl1HsxBICeAE-cwgmZ1l-KYgGkEkQiNd5uQApKY-d6wnowoU1LTgCUk4SPjtoQ&_nc_zt=23&_nc_ht=scontent.fsin3-1.fna&_nc_gid=AHK4SE-ZuWS_stxAFNrbed3&oh=00_AYBeyPBRa1ljLC0-k777n0nIVnERcUM3ww9VYF_sQ85jTQ&oe=67AED358",
   "Nico":
       "https://instagram.fsin3-1.fna.fbcdn.net/v/t51.2885-19/355657777_3163787183919855_587043021405047562_n.jpg?stp=dst-jpg_s150x150_tt6&_nc_ht=instagram.fsin3-1.fna.fbcdn.net&_nc_cat=103&_nc_oc=Q6cZ2AGH3Gok1SItXdHOZGAZAPiCep3WvJbMuAlVPNi2O-QyFCjT_gH0W_fJDMHFjYM8gJI&_nc_ohc=GxLXHhPp2ekQ7kNvgHVtPe_&_nc_gid=2f4fb9d90fbd43ebb022a74d3a769a0b&edm=AP4sbd4BAAAA&ccb=7-5&oh=00_AYAz5tyiUfQY5KJ6oscDmvO7EuUXAwl6W7XiG4jQu-zrtA&oe=67AE79AE&_nc_sid=7a9f4b",
 };
@@ -37,6 +36,9 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
       "isFollowed": true,
       "followerCount": 1,
       "imageURL": profileImages["Daegyu"],
+      "friendImages": [
+        profileImages["La Musique Studio"],
+      ],
     },
     {
       "name": "La Musique Studio",
@@ -45,6 +47,11 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
       "isFollowed": true,
       "followerCount": 1061000153,
       "imageURL": profileImages["La Musique Studio"],
+      "friendImages": [
+        profileImages["Daegyu"],
+        profileImages["Nico"],
+      ],
+      "hasBlueBadge": true,
     },
     {
       "name": "Pingu",
@@ -60,6 +67,11 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
       "isFollowed": true,
       "followerCount": 11902000300,
       "imageURL": profileImages["Nico"],
+      "friendImages": [
+        profileImages["Daegyu"],
+        profileImages["La Musique Studio"],
+      ],
+      "hasBlueBadge": true,
     },
     {
       "name": "Pingu2",
@@ -132,6 +144,12 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                       isFollowed: user["isFollowed"],
                       followerCount: user["followerCount"],
                       imageURL: user["imageURL"],
+                      hasBlueBadge: user["hasBlueBadge"] ?? false,
+                      friendImages: user["friendImages"] != null
+                          ? (user["friendImages"] as List)
+                              .whereType<String>()
+                              .toList()
+                          : null,
                     ),
                   )
                   .toList()
@@ -144,6 +162,12 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                       isFollowed: user["isFollowed"],
                       followerCount: user["followerCount"],
                       imageURL: user["imageURL"],
+                      hasBlueBadge: user["hasBlueBadge"] ?? false,
+                      friendImages: user["friendImages"] != null
+                          ? (user["friendImages"] as List)
+                              .whereType<String>()
+                              .toList()
+                          : null,
                     ),
                   )
                   .toList()),
