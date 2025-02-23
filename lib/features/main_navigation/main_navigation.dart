@@ -12,14 +12,26 @@ import 'package:thread_clone/features/post/post_main.dart';
 // import 'package:thread_clone/features/videos/video_timeline_screen.dart';
 
 class MainNavigationScreen extends StatefulWidget {
-  const MainNavigationScreen({super.key});
+  static const String routeName = "mainNavigation";
+  final String tab;
+  const MainNavigationScreen({
+    super.key,
+    required this.tab,
+  });
 
   @override
   State<MainNavigationScreen> createState() => _MainNavigationScreenState();
 }
 
 class _MainNavigationScreenState extends State<MainNavigationScreen> {
-  int _selectedIndex = 1;
+  final List<String> _tabs = [
+    "home",
+    "discover",
+    "xxxx",
+    "inbox",
+    "profile",
+  ];
+  late int _selectedIndex = _tabs.indexOf(widget.tab);
 
   void _onTap(int index) {
     setState(() {
@@ -52,12 +64,12 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
           ),
           Offstage(
             offstage: _selectedIndex != 1,
-            child: DiscoverScreen(),
+            child: const DiscoverScreen(),
           ),
-          // Offstage(
-          //   offstage: _selectedIndex != 2,
-          //   child: const VideoRecordingScreen(),
-          // ),
+          Offstage(
+            offstage: _selectedIndex != 2,
+            child: const VideoRecordingScreen(),
+          ),
           Offstage(
             offstage: _selectedIndex != 3,
             child: const ActivityScreen(),
